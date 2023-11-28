@@ -22,7 +22,7 @@ app.use(express.json());
 app.post("/identity-check", async (req, res) => {
 	const input = {
 		customer: { id: uuidv4(), email: req.body.email },
-		webhook: "https://3cec-2804-7f0-3889-82e1-a523-989f-a565-be04.ngrok.io/webhook"
+		webhook: process.env.NGROK
 	};
 	const response = await axios.post("https://oauth.sandbox.verifymycontent.com/api/v1/identity-verification", input, {
 		headers: {

@@ -1,12 +1,12 @@
 # Identity Check Verification API
 
-This is a Node.js application for triggering Identity Check Verification through the VerifyMyContent API. It uses MongoDB for data persistence and ngrok for exposing the local server during testing.
+This is a Node.js application for triggering Identity Check Verification through the VerifyMyContent API. It uses MongoDB for data persistence and Ngrock for exposing the local server during testing.
 
 ## Prerequisites
 
 - Node.js and npm installed
 - MongoDB installed and running
-- ngrok installed (for testing webhook locally)
+- Ngrock installed (for testing webhook locally)
 
 ## Getting Started
 
@@ -35,9 +35,8 @@ This is a Node.js application for triggering Identity Check Verification through
     MONGO_URI=mongodb+srv://your-mongo-username:your-mongo-password@cluster0.e5rir3s.mongodb.net/?retryWrites=true&w=majority
     KEY=your-api-key
     SECRET=your-api-secret
+    NGROK=ngrok-url
     ```
-
-    Replace placeholders like `your-mongo-username`, `your-mongo-password`, `your-api-key`, and `your-api-secret` with your actual information.
 
 ## Running the Application
 
@@ -57,7 +56,7 @@ This is a Node.js application for triggering Identity Check Verification through
     ngrok http 3000
     ```
 
-    Copy the ngrok URL and use it for setting up the webhook endpoint in your VerifyMyContent account.
+    Copy the generated ngrok URL to the .env file.
 
 ## Endpoints
 
@@ -71,29 +70,18 @@ This is a Node.js application for triggering Identity Check Verification through
 
 ### 2. Webhook Endpoint
 
+Should be triggered automatically by the webhook after the user finishes the verification.
+
 - **Endpoint:** `/webhook`
 - **Method:** POST
 - **Description:** Receives results from the Identity Check webhook.
 - **Request Payload:** JSON with `customer_id` and `status`.
 - **Response:** Status 200.
 
-## Environment Variables
+## Problems faced
+The main problem with this test was triggering the webhook using ngRock since this isn't a real environment. Setting up everything to make it possible for this to work would take some time since I don't have much experience using it. I did the configs for my local environment and made it work but it would take more time for me to figure out how to make it more reliable to external use.
 
-Create a file called .env with the params
-
-- **MONGO_URI:** MongoDB connection URI.
-- **KEY:** Your API key for VerifyMyContent.
-- **SECRET:** Your API secret for VerifyMyContent.
-
-## Contributing
-
-If you find issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-
+### Improvements to the platform.
 The documentation could be improved with some details.
-We could improve the docs for node, since is one of the most used language.
-We need to specify that, in NODE we need to stringify the input before Hashing it.
+- We could improve the docs for NODE since is one of the most used languages.
+- We need to specify that, in NODE we need to stringify the input before Hashing it.
